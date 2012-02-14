@@ -11,7 +11,7 @@ from django.utils.translation import ugettext as _
 import plata
 
 
-logger = logging.getLogger('plata.product.modules.options.views')
+logger = logging.getLogger('options_product.views')
 
 
 class ProductView(object):

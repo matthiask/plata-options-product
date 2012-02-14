@@ -8,7 +8,7 @@ from pdfdocument.document import PDFDocument
 
 import plata
 from plata.discount.models import Discount
-from plata.product.modules.options.models import Product, \
+from options_product.models import Product, \
     ProductVariation, Category, ProductPrice
 from plata.product.stock.models import Period, StockTransaction
 import plata.reporting.order
@@ -775,7 +775,7 @@ class ModelTest(PlataTest):
     def test_21_product_template_tags(self):
         """Test the product template tag library"""
 
-        from plata.product.modules.options.templatetags import plata_product_tags
+        from options_product.templatetags import plata_product_tags
         product = self.create_product()
         product.categories.create(
             name='Category',

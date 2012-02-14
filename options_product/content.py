@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 import plata
-from plata.product.modules.options.models import Category
+from options_product.models import Category
 
 
 class CategoryList(models.Model):

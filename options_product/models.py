@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 import plata
 from plata.compat import product as itertools_product
 from plata.product.models import ProductBase
-from plata.shop.models import Order, Price
+from plata.shop.models import Order, PriceBase
 
 
 class PriceManager(models.Manager):
@@ -24,7 +24,7 @@ class PriceManager(models.Manager):
             Q(valid_until__isnull=True) | Q(valid_until__gte=date.today()))
 
 
-class ProductPrice(Price):
+class ProductPrice(PriceBase):
     product = models.ForeignKey('product.Product', verbose_name=_('product'),
         related_name='prices')
 
@@ -47,7 +47,7 @@ class ProductPrice(Price):
         """
         Set price data on the ``OrderItem`` passed
         """
-        super(Price, self).handle_order_item(item)
+        super(PriceBase, self).handle_order_item(item)
         item.is_sale = self.is_sale
 
 

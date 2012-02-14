@@ -4,8 +4,8 @@ from django.views.generic import  list_detail
 import plata
 from plata.contact.models import Contact
 from plata.discount.models import Discount
-from plata.product.modules.options.models import Product
-from plata.product.modules.options.views import ProductView
+from options_product.models import Product
+from options_product.views import ProductView
 from plata.shop.views import Shop
 from plata.shop.models import Order
 

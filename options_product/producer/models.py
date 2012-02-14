@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from plata.product.modules.options.models import Product # FIXME
+from options_product.models import Product
 
 
 class ProducerManager(models.Manager):

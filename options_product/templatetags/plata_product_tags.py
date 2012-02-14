@@ -1,6 +1,6 @@
 from django import template
 
-from plata.product.modules.options.models import Product
+from options_product.models import Product
 
 
 register = template.Library()
