@@ -119,7 +119,7 @@ INSTALLED_APPS = (
 
 #PLATA_PRICE_INCLUDES_TAX = False
 
-PLATA_SHOP_PRODUCT = 'product.ProductVariation'
+PLATA_SHOP_PRODUCT = 'options_product.ProductVariation'
 PLATA_STOCK_TRACKING = True
 OPTIONS_PRODUCT_FEINCMS = False
 

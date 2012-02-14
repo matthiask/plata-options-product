@@ -36,7 +36,6 @@ class ProductPrice(PriceBase):
         help_text=_('Set this if this price is a sale price. Whether the sale is temporary or not does not matter.'))
 
     class Meta:
-        app_label = 'product'
         ordering = ['-valid_from']
         verbose_name = _('price')
         verbose_name_plural = _('prices')
@@ -87,7 +86,6 @@ class Category(models.Model):
         related_name='children', verbose_name=_('parent'))
 
     class Meta:
-        app_label = 'product'
         ordering = ['parent__ordering', 'parent__name', 'ordering', 'name']
         verbose_name = _('category')
         verbose_name_plural = _('categories')
@@ -114,7 +112,6 @@ class OptionGroup(models.Model):
     name = models.CharField(_('name'), max_length=100)
 
     class Meta:
-        app_label = 'product'
         ordering = ['id']
         verbose_name = _('option group')
         verbose_name_plural = _('option groups')
@@ -136,7 +133,6 @@ class Option(models.Model):
     ordering = models.PositiveIntegerField(_('ordering'), default=0)
 
     class Meta:
-        app_label = 'product'
         ordering = ['group', 'ordering']
         verbose_name = _('option')
         verbose_name_plural = _('options')
@@ -195,7 +191,6 @@ class Product(Base):
         blank=True, null=True, verbose_name=_('option groups'))
 
     class Meta:
-        app_label = 'product'
         ordering = ['ordering', 'name']
         verbose_name = _('product')
         verbose_name_plural = _('products')
@@ -338,7 +333,6 @@ class ProductVariation(models.Model):
     ordering = models.PositiveIntegerField(_('ordering'), default=0)
 
     class Meta:
-        app_label = 'product'
         ordering = ['ordering', 'product']
         verbose_name = _('product variation')
         verbose_name_plural = _('product variations')
@@ -378,7 +372,6 @@ class ProductImage(models.Model):
     ordering = models.PositiveIntegerField(_('ordering'), default=0)
 
     class Meta:
-        app_label = 'product'
         ordering = ['ordering']
         verbose_name = _('product image')
         verbose_name_plural = _('product images')
