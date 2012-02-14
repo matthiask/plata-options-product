@@ -353,7 +353,7 @@ class ProductPrice(PriceBase):
         """
         Set price data on the ``OrderItem`` passed
         """
-        super(PriceBase, self).handle_order_item(item)
+        super(ProductPrice, self).handle_order_item(item)
         item.is_sale = self.is_sale
 
 
