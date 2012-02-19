@@ -11,9 +11,10 @@ from django.db.models import Count, signals
 from django.utils.translation import ugettext_lazy as _
 
 import plata
-from plata.compat import product as itertools_product
 from plata.product.models import ProductBase
 from plata.shop.models import Order, PriceBase
+
+from options_product.compat import product as itertools_product
 
 
 class CategoryManager(models.Manager):
