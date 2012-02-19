@@ -143,7 +143,6 @@ TEST_RUNNER = 'options.test_utils.test_runner_with_coverage'
 TEST_RUNNER = 'options.test_utils.CoverageRunner'
 COVERAGE_MODULES = [
     'plata',
-    'plata.compat',
     'plata.contact.admin',
     'plata.contact.models',
     'plata.context_processors',
