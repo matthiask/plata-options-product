@@ -218,7 +218,7 @@ admin.site.register(models.ProductPrice,
 
 admin.site.register(models.ProductVariation,
     admin_class=ReadonlyModelAdmin,
-    list_display=('product', 'is_active', 'sku', 'items_in_stock', 'ordering'),
+    list_display=('__unicode__', 'is_active', 'sku', 'items_in_stock', 'ordering'),
     list_filter=('is_active',),
     readonly_fields=('product', 'is_active', 'sku', 'items_in_stock', 'options', 'ordering'),
     search_fields=('sku', 'product__name', 'product__description'),
