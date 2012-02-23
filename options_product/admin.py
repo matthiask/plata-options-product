@@ -86,6 +86,20 @@ class ProductVariationFormSet(BaseInlineFormSet):
 class ProductVariationForm(forms.ModelForm):
     sku = forms.CharField(label=_('SKU'), max_length=100, required=False)
 
+    def __init__(self, *args, **kwargs):
+        super(ProductVariationForm, self).__init__(*args, **kwargs)
+
+        try:
+            # :-(
+            import inspect
+            instance = inspect.currentframe().f_back.f_locals['self'].instance
+        except KeyError:
+            instance = None
+
+        if instance:
+            self.fields['options'].queryset = models.Option.objects.filter(
+                group__in=instance.option_groups.all())
+
     def clean(self):
         options = self.cleaned_data.get('options', [])
         try:
