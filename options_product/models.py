@@ -114,7 +114,7 @@ class ProductManager(models.Manager):
     def bestsellers(self, queryset=None):
         queryset = queryset or self
         return queryset.filter(
-            variations__orderitem__order__status=Order.COMPLETED,
+            variations__orderitem__order__status__gte=Order.PAID,
             ).annotate(sold=Count('variations__orderitem')).order_by('-sold')
 
     def also_bought(self, product):
