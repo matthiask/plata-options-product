@@ -96,7 +96,7 @@ class ProductVariationForm(forms.ModelForm):
         except KeyError:
             instance = None
 
-        if instance:
+        if instance and instance.pk:
             self.fields['options'].queryset = models.Option.objects.filter(
                 group__in=instance.option_groups.all())
 
