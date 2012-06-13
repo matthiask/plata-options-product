@@ -89,16 +89,29 @@ class ProductVariationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProductVariationForm, self).__init__(*args, **kwargs)
 
+        # :-(
+        import inspect
+        frame = inspect.currentframe()
+        groups = None
         try:
-            # :-(
-            import inspect
-            instance = inspect.currentframe().f_back.f_locals['self'].instance
-        except KeyError:
-            instance = None
+            while frame.f_back:
+                if 'form' in frame.f_locals.keys():
+                    form = frame.f_locals['form']
+                    try:
+                        groups = form.cleaned_data.get('option_groups')
+                        break
+                    except AttributeError:
+                        if form.instance and form.instance.pk:
+                            groups = form.instance.option_groups.all()
+                            break
 
-        if instance and instance.pk:
+                frame = frame.f_back
+        except (AttributeError, KeyError):
+            pass
+
+        if groups is not None:
             self.fields['options'].queryset = models.Option.objects.filter(
-                group__in=instance.option_groups.all())
+                group__in=groups)
 
     def clean(self):
         options = self.cleaned_data.get('options', [])
