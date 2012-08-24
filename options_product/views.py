@@ -146,9 +146,12 @@ class ProductView(object):
 
                 try:
                     try:
-                        data['price'] = product.get_price(currency=self.order.currency, **data)
+                        data['price'] = variation.get_price(
+                            currency=self.order.currency, **data)
                     except TypeError:
-                        data['price'] = product.get_price(currency=self.order.currency)
+                        data['price'] = variation.get_price(
+                            currency=self.order.currency)
+
                 except ObjectDoesNotExist:
                     raise forms.ValidationError(_('Price could not be determined.'))
 
