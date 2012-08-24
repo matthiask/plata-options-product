@@ -320,6 +320,12 @@ class ProductVariation(models.Model):
         orderitem.name = unicode(self)
         orderitem.sku = self.sku
 
+    def handle_stock_transaction(self, transaction):
+        if not transaction.name:
+            transaction.name = unicode(self)
+        if not transaction.sku:
+            transaction.sku = self.sku
+
     get_absolute_url = _generate_proxy('get_absolute_url')
     get_price = _generate_proxy('get_price')
 
