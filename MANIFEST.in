@@ -1,0 +1,9 @@
+include AUTHORS
+include LICENSE
+include MANIFEST.in
+include README.rst
+include requirements.txt
+include setuplib.py
+recursive-include options_product/static *
+recursive-include options_product/locale *
+recursive-include options_product/templates *
