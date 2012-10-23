@@ -365,7 +365,11 @@ class ProductPrice(PriceBase):
 
 
 def flush_price_cache(instance, **kwargs):
-    instance.product.flush_price_cache()
+    try:
+        instance.product.flush_price_cache()
+    except models.ObjectDoesNotExist:
+        # The product has been deleted already
+        pass
 
 signals.post_save.connect(flush_price_cache, sender=ProductPrice)
 signals.post_delete.connect(flush_price_cache, sender=ProductPrice)
