@@ -59,7 +59,7 @@ class ProductView(object):
 
                 order.recalculate_total()
 
-                return redirect(redirect_to)
+                return self.shop.redirect(redirect_to)
         else:
             form = OrderItemForm()
 
@@ -69,8 +69,7 @@ class ProductView(object):
             template_object_name: product,
             })
 
-        return render_to_response(template_name, context,
-            context_instance=RequestContext(request))
+        return self.shop.render(request, template_name, context)
 
     def order_modify_item_form(self, request, product):
         """
