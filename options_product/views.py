@@ -96,21 +96,22 @@ class ProductView(object):
 
                 options = [data.get('option_%s' % group.id) for group in product.option_groups.all()]
 
-                if all(options):
+                if not all(options):
                     # If we do not have values for all options, the form will not
-                    # validate anyway.
+                    # validate and we cannot retrieve a variation.
+                    return data
 
-                    variations = product.variations.filter(is_active=True)
+                variations = product.variations.filter(is_active=True)
 
-                    for group in product.option_groups.all():
-                        variations = variations.filter(options=self.cleaned_data.get('option_%s' % group.id))
+                for group in product.option_groups.all():
+                    variations = variations.filter(options=self.cleaned_data.get('option_%s' % group.id))
 
-                    try:
-                        data['variation'] = variations.get()
-                    except ObjectDoesNotExist:
-                        logger.warn('Product variation of %s with options %s does not exist' % (
-                            product, options))
-                        raise forms.ValidationError(_('The requested product does not exist.'))
+                try:
+                    data['variation'] = variations.get()
+                except ObjectDoesNotExist:
+                    logger.warn('Product variation of %s with options %s does not exist' % (
+                        product, options))
+                    raise forms.ValidationError(_('The requested product does not exist.'))
 
                 quantity = new_quantity = data.get('quantity')
                 variation = data.get('variation')
